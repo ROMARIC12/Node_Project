@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter un personnel</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Ajouter un personnel</h1>
+        <form action="/personnel/add" method="POST" class="mt-4">
+            <div class="mb-3">
+                <label for="nom" class="form-label">Nom</label>
+                <input type="text" class="form-control" id="nom" name="nom" required>
+            </div>
+            <div class="mb-3">
+                <label for="prenoms" class="form-label">Prénoms</label>
+                <input type="text" class="form-control" id="prenoms" name="prenoms" required>
+            </div>
+            <div class="mb-3">
+                <label for="telephone" class="form-label">Téléphone</label>
+                <input type="text" class="form-control" id="telephone" name="telephone">
+            </div>
+            <div class="mb-3">
+                <label for="genre" class="form-label">Genre</label>
+                <select class="form-select" id="genre" name="genre" required>
+                    <option value="Homme">Homme</option>
+                    <option value="Femme">Femme</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="profession" class="form-label">Profession</label>
+                <input type="text" class="form-control" id="profession" name="profession">
+            </div>
+            <div class="mb-3">
+                <label for="departement" class="form-label">Département</label>
+                <input type="text" class="form-control" id="departement" name="departement">
+            </div>
+            <div class="mb-3">
+                <label for="salaire" class="form-label">Salaire</label>
+                <input type="number" class="form-control" id="salaire" name="salaire" step="0.01">
+            </div>
+            <div class="mb-3">
+                <label for="date_embauche" class="form-label">Date d'embauche</label>
+                <input type="date" class="form-control" id="date_embauche" name="date_embauche">
+            </div>
+            <div class="mb-3">
+                <label for="nombre_enfants" class="form-label">Nombre d'enfants</label>
+                <input type="number" class="form-control" id="nombre_enfants" name="nombre_enfants">
+            </div>
+            <div class="mb-3">
+                <label for="situation_matrimoniale" class="form-label">Situation matrimoniale</label>
+                <select class="form-select" id="situation_matrimoniale" name="situation_matrimoniale" required>
+                    <option value="Célibataire">Célibataire</option>
+                    <option value="Marié(e)">Marié(e)</option>
+                    <option value="Divorcé(e)">Divorcé(e)</option>
+                    <option value="Veuf(ve)">Veuf(ve)</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Ajouter</button>
+        </form>
+
+        <div class="text-end mb-3">
+            <a href="/dashboard" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Retour au tableau de bord
+            </a>
+        </div>
+
+        <table class="table table-bordered table-striped mt-5">
+            <thead class="table-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Nom</th>
+                    <th>Prénoms</th>
+                    <th>Téléphone</th>
+                    <th>Genre</th>
+                    <th>Profession</th>
+                    <th>Département</th>
+                    <th>Salaire</th>
+                    <th>Date d'embauche</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (personnels && personnels.length> 0) { %>
+                    <% personnels.forEach((personnel, index)=> { %>
+                        <tr>
+                            <td>
+                                <%= index + 1 %>
+                            </td>
+                            <td>
+                                <%= personnel.nom %>
+                            </td>
+                            <td>
+                                <%= personnel.prenoms %>
+                            </td>
+                            <td>
+                                <%= personnel.telephone %>
+                            </td>
+                            <td>
+                                <%= personnel.genre %>
+                            </td>
+                            <td>
+                                <%= personnel.profession %>
+                            </td>
+                            <td>
+                                <%= personnel.departement %>
+                            </td>
+                            <td>
+                                <%= personnel.salaire %>
+                            </td>
+                            <td>
+                                <%= personnel.date_embauche ? personnel.date_embauche.toLocaleDateString() : '' %>
+                            </td>
+                            <td>
+                                <a href="/personnel/edit/<%= personnel._id %>"
+                                    class="btn btn-primary btn-sm">Modifier</a>
+                                <a href="/personnel/delete/<%= personnel._id %>"
+                                    class="btn btn-danger btn-sm">Supprimer</a>
+                            </td>
+                        </tr>
+                        <% }); %>
+                            <% } else { %>
+                                <tr>
+                                    <td colspan="10" class="text-center">Aucun personnel trouvé</td>
+                                </tr>
+                                <% } %>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
