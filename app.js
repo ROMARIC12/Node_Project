@@ -63,4 +63,4 @@ app.use("/personnel", require("./routes/personnel")); // Routes pour la gestion 
 
 
 
-//app.listen(process.env.PORT, () => console.log(`Serveur démarré sur le port ${process.env.PORT}`)); // Message de confirmation lorsque le serveur démarre
+app.listen(process.env.PORT, () => console.log(`Serveur démarré sur le port ${process.env.PORT}`)); // Message de confirmation lorsque le serveur démarre
